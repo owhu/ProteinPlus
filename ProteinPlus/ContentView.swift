@@ -27,8 +27,14 @@ struct ContentView: View {
             Section {
                 Button {
                     total += proteinAmount
+                    saveTotal()
                 } label: {
                     Image(systemName: "plus")
+                        .padding()    // Add padding inside the button
+                        .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                        .background(Color.blue) // Optional: Change the background color
+                        .foregroundColor(.white) // Change text and icon color
+                        .cornerRadius(10) // Round the corners of the button
                 }
             }
             .padding()
@@ -43,7 +49,13 @@ struct ContentView: View {
                  saveTotal()
              } label: {
                  Label("Reset", systemImage: "restart.circle")
+                     .padding()    // Add padding inside the button
+                     .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                     .background(Color.blue) // Optional: Change the background color
+                     .foregroundColor(.white) // Change text and icon color
+                     .cornerRadius(10) // Round the corners of the button
              }
+
         }
     }
     private func saveTotal() {
