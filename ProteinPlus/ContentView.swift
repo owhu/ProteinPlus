@@ -79,6 +79,8 @@ struct ContentView: View {
                     Text("\(total) \(total == 1 ? "gram" : "grams")")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundStyle(total > 76 && total < 93 ? .green : .red)
+                    Text("Aim for range: 77 - 92")
                 }
             }
             
