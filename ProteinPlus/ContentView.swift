@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var total = UserDefaults.standard.double(forKey: "savedTotal")
-    @State private var proteinAmount = 1.0
+    @AppStorage("total") private var total = 0 /*UserDefaults.standard.double(forKey: "savedTotal")*/
+    @State private var proteinAmount = 1
     
     var body: some View {
         VStack {
@@ -18,49 +18,77 @@ struct ContentView: View {
                 .scaledToFit()
             Section{
                 Picker("Protein", selection: $proteinAmount) {
-                    ForEach(1..<80) { amount in
-                        Text("\(amount) gram(s)").tag(Double(amount))
+                    ForEach(1..<81) { amount in
+                        Text("^[\(amount) gram](inflect: true)")
+//                            .tag(Double(amount))
                     }
                 }
             }
             .pickerStyle(.wheel)
             Section {
-                Button {
-                    total += proteinAmount
-                    saveTotal()
-                } label: {
-                    Image(systemName: "plus")
-                        .padding()    // Add padding inside the button
-                        .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
-                        .background(Color.blue) // Optional: Change the background color
-                        .foregroundColor(.white) // Change text and icon color
-                        .cornerRadius(10) // Round the corners of the button
+                VStack {
+                    
+                    Button {
+                        total += proteinAmount
+                        //                    saveTotal()
+                    } label: {
+                        Image(systemName: "plus")
+                            .padding()    // Add padding inside the button
+                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .background(Color.yellow) // Optional: Change the background color
+                            .foregroundColor(.black) // Change text and icon color
+                            .cornerRadius(10) // Round the corners of the button
+                    }
+                    .padding()
+                    
+                    Button {
+                        total -= proteinAmount
+                        //                    saveTotal()
+                    } label: {
+                        Image(systemName: "minus")
+                            .padding()    // Add padding inside the button
+                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .background(Color.yellow) // Optional: Change the background color
+                            .foregroundColor(.black) // Change text and icon color
+                            .cornerRadius(10) // Round the corners of the button
+                    }
+                    .padding()
+                    
+                    
+                    Button {
+                        total = 0
+                        //                        saveTotal()
+                    } label: {
+                        Label("Reset", systemImage: "restart.circle")
+                            .padding()    // Add padding inside the button
+                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .background(Color.yellow) // Optional: Change the background color
+                            .foregroundColor(.white) // Change text and icon color
+                            .cornerRadius(10) // Round the corners of the button
+                    }
+                    .padding()
                 }
             }
             .padding()
+            
             Section {
-                Text("Total Protein: \(total, specifier: "%.1f") grams")
+                VStack(alignment: .center) {
+                    
+                    Text("Total Protein:")
+                        .font(.largeTitle)
+                    Text("\(total) \(total == 1 ? "gram" : "grams")")
+                        .font(.largeTitle)
+                        .bold()
+                }
             }
-            .bold()
+            
             .padding()
             
-            Button {
-                 total = 0.0
-                 saveTotal()
-             } label: {
-                 Label("Reset", systemImage: "restart.circle")
-                     .padding()    // Add padding inside the button
-                     .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
-                     .background(Color.blue) // Optional: Change the background color
-                     .foregroundColor(.white) // Change text and icon color
-                     .cornerRadius(10) // Round the corners of the button
-             }
-
         }
     }
-    private func saveTotal() {
-        UserDefaults.standard.set(total, forKey: "savedTotal")
-    }
+//    private func saveTotal() {
+//        UserDefaults.standard.set(total, forKey: "savedTotal")
+//    }
 }
 
 #Preview {
