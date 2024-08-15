@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("total") private var total = 0 /*UserDefaults.standard.double(forKey: "savedTotal")*/
-    @State private var proteinAmount = 1
+    @State private var proteinAmount = 0
     
     var body: some View {
         VStack {
@@ -20,7 +20,7 @@ struct ContentView: View {
                 Picker("Protein", selection: $proteinAmount) {
                     ForEach(1..<81) { amount in
                         Text("^[\(amount) gram](inflect: true)")
-//                            .tag(Double(amount))
+                            .tag(amount)
                     }
                 }
             }
@@ -79,8 +79,8 @@ struct ContentView: View {
                     Text("\(total) \(total == 1 ? "gram" : "grams")")
                         .font(.largeTitle)
                         .bold()
-                        .foregroundStyle(total > 76 && total < 93 ? .green : .red)
-                    Text("Aim for range: 77 - 92")
+                        .foregroundStyle(total > 74 && total < 91 ? .green : .white)
+                    Text("Aim for range: 75 - 90")
                 }
             }
             
