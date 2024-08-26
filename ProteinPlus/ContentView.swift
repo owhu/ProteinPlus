@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("total") private var total = 0 /*UserDefaults.standard.double(forKey: "savedTotal")*/
-    @State private var proteinAmount = 0
+    @State private var proteinAmount = 1
+    @AppStorage("lowerBound") private var lowerBound = 75
+    @AppStorage("upperBound") private var upperBound = 90
+    
     
     var body: some View {
         VStack {
@@ -40,6 +43,7 @@ struct ContentView: View {
                             .cornerRadius(10) // Round the corners of the button
                     }
                     .padding()
+                    .sensoryFeedback(.increase, trigger: total)
                     
                     Button {
                         total -= proteinAmount
@@ -53,6 +57,7 @@ struct ContentView: View {
                             .cornerRadius(10) // Round the corners of the button
                     }
                     .padding()
+                    .sensoryFeedback(.increase, trigger: total)
                     
                     
                     Button {
@@ -76,16 +81,39 @@ struct ContentView: View {
                     
                     Text("Total Protein:")
                         .font(.largeTitle)
-                    Text("\(total) \(total == 1 ? "gram" : "grams")")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundStyle(total > 74 && total < 91 ? .green : .white)
-                    Text("Aim for range: 75 - 90")
+                    HStack {
+                        if total > 74 && total < 91 {
+                            Image(systemName: "checkmark.circle.fill")
+                        }
+                        Text("\(total) \(total == 1 ? "gram" : "grams")")
+                            .font(.largeTitle)
+                            .bold()
+                     
+                    }
+                    Text("Aim for range: \(lowerBound) - \(upperBound)")
                 }
             }
             
             .padding()
             
+        }
+    }
+    // Save the daily count to UserDefaults
+    func saveTotal() {
+        UserDefaults.standard.set(total, forKey: "total")
+    }
+    
+    // Check if it's a new day and reset variables if necessary
+    func checkIfNewDay() {
+        let lastAccessDate = UserDefaults.standard.object(forKey: "lastAccessDate") as? Date ?? Date.distantPast
+        
+        if !Calendar.current.isDateInToday(lastAccessDate) {
+            // Reset the variables for a new day
+            total = 0
+            UserDefaults.standard.set(Date(), forKey: "lastAccessDate")
+        } else {
+            // Load the saved count for the current day
+            total = UserDefaults.standard.integer(forKey: "total")
         }
     }
 //    private func saveTotal() {
