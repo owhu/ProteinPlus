@@ -13,12 +13,39 @@ struct ContentView: View {
     @AppStorage("lowerBound") private var lowerBound = 75
     @AppStorage("upperBound") private var upperBound = 90
     
+    @State private var isBouncing = false
+    
     
     var body: some View {
         VStack {
-            Image(.pixelPikachu)
-                .resizable()
-                .scaledToFit()
+            HStack{
+                if isBouncing {
+                    Image(systemName: "bolt.horizontal.fill")
+                        .foregroundStyle(.yellow)
+                        .padding(.horizontal, 36)
+
+                }
+                Spacer()
+                Image(.pixelPikachu)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(isBouncing ? 1.2 : 1)
+                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: isBouncing)
+                    .onTapGesture {
+                        isBouncing.toggle()
+                        // Then, after a short delay, scale it back down
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            isBouncing = false
+                        }
+                    }
+                Spacer()
+                if isBouncing {
+                    Image(systemName: "bolt.horizontal.fill")
+                        .foregroundStyle(.yellow)
+                        .padding(.horizontal, 36)
+                }
+            }
+                .padding(.top)
             Section{
                 Picker("Protein", selection: $proteinAmount) {
                     ForEach(1..<81) { amount in
@@ -80,23 +107,30 @@ struct ContentView: View {
                 VStack(alignment: .center) {
                     
                     Text("Total Protein:")
-                        .font(.largeTitle)
+                        .font(.title)
                     HStack {
                         if total > 74 && total < 91 {
                             Image(systemName: "checkmark.circle.fill")
                         }
                         Text("\(total) \(total == 1 ? "gram" : "grams")")
                             .font(.largeTitle)
-                            .bold()
+                            .fontWeight(.semibold)
+                            .foregroundStyle(isBouncing ? .yellow : .primary)
+                        
+                        
                      
                     }
                     Text("Aim for range: \(lowerBound) - \(upperBound)")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                    
                 }
             }
             
             .padding()
             
         }
+        .onAppear { checkIfNewDay() }
     }
     // Save the daily count to UserDefaults
     func saveTotal() {
