@@ -8,44 +8,54 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("total") private var total = 0 /*UserDefaults.standard.double(forKey: "savedTotal")*/
-    @State private var proteinAmount = 1
-    @AppStorage("lowerBound") private var lowerBound = 75
+    @AppStorage("total") private var total = 0
     @AppStorage("upperBound") private var upperBound = 90
     
-    @State private var isBouncing = false
+    @State private var proteinAmount = 1
+    @State var progressValue: Float = 0.0
     
+    @State private var showingEditView = false
+
     
     var body: some View {
         VStack {
-            HStack{
-                if isBouncing {
-                    Image(systemName: "bolt.horizontal.fill")
-                        .foregroundStyle(.yellow)
-                        .padding(.horizontal, 36)
-
-                }
-                Spacer()
-                Image(.pixelPikachu)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(isBouncing ? 1.2 : 1)
-                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: isBouncing)
-                    .onTapGesture {
-                        isBouncing.toggle()
-                        // Then, after a short delay, scale it back down
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            isBouncing = false
-                        }
+            ZStack {
+                ProgressView(progress: self.$progressValue)
+                    .frame(width: 160.0, height: 160.0)
+                    .padding(.top, 20)
+                    .onAppear {
+                        self.progressValue = progressValue
                     }
-                Spacer()
-                if isBouncing {
-                    Image(systemName: "bolt.horizontal.fill")
-                        .foregroundStyle(.yellow)
-                        .padding(.horizontal, 36)
+                VStack {
+                    HStack {
+                        if total >= upperBound {
+                            Image(systemName: "checkmark.circle.fill")
+                        }
+                        Text("\(total) g")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                    }
+                    
+//                    Text("Goal: \(upperBound) g")
+//                        .font(.subheadline)
+//                        .foregroundStyle(.gray)
+                    
+                    Button("Goal: \(upperBound) g") {
+                        showingEditView = true
+                    }
+                    .font(.subheadline)
+                    .foregroundStyle(.gray)
+                    .sheet(isPresented: $showingEditView) {
+                        EditUpperBoundView(upperBound: $upperBound)
+                            .presentationDetents([.height(300)])
+                    }
                 }
-            }
                 .padding(.top)
+            }
+            .padding(.top)
+            
+       
+            
             Section{
                 Picker("Protein", selection: $proteinAmount) {
                     ForEach(1..<81) { amount in
@@ -55,30 +65,36 @@ struct ContentView: View {
                 }
             }
             .pickerStyle(.wheel)
+            
             Section {
                 VStack {
                     
                     Button {
-                        total += proteinAmount
-                        //                    saveTotal()
+                        withAnimation(.easeInOut(duration: 2.0)) {
+                            total += proteinAmount
+                            progressValue += (Float(proteinAmount)) / Float(upperBound)
+                        }
+
                     } label: {
                         Image(systemName: "plus")
                             .padding()    // Add padding inside the button
-                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .frame(width: 75, height: 60) // Set a minimum size for the button
                             .background(Color.yellow) // Optional: Change the background color
                             .foregroundColor(.black) // Change text and icon color
                             .cornerRadius(10) // Round the corners of the button
                     }
                     .padding()
                     .sensoryFeedback(.increase, trigger: total)
-                    
+
                     Button {
-                        total -= proteinAmount
-                        //                    saveTotal()
+                        withAnimation(.easeInOut(duration: 2.0)) {
+                            total -= proteinAmount
+                            progressValue -= (Float(proteinAmount)) / Float(upperBound)
+                        }
                     } label: {
                         Image(systemName: "minus")
                             .padding()    // Add padding inside the button
-                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .frame(width: 75, height: 60) // Set a minimum size for the button
                             .background(Color.yellow) // Optional: Change the background color
                             .foregroundColor(.black) // Change text and icon color
                             .cornerRadius(10) // Round the corners of the button
@@ -88,47 +104,23 @@ struct ContentView: View {
                     
                     
                     Button {
-                        total = 0
-                        //                        saveTotal()
+                        withAnimation(.easeInOut(duration: 2.0)) {
+                            total = 0
+                            progressValue = 0
+                        }
                     } label: {
-                        Label("Reset", systemImage: "restart.circle")
+                        Image(systemName: "restart.circle")
                             .padding()    // Add padding inside the button
-                            .frame(minWidth: 100, minHeight: 50) // Set a minimum size for the button
+                            .frame(width: 50, height: 40) // Set a minimum size for the button
                             .background(Color.yellow) // Optional: Change the background color
-                            .foregroundColor(.white) // Change text and icon color
+                            .foregroundColor(.black) // Change text and icon color
                             .cornerRadius(10) // Round the corners of the button
                     }
                     .padding()
                 }
+                
             }
             .padding()
-            
-            Section {
-                VStack(alignment: .center) {
-                    
-                    Text("Total Protein:")
-                        .font(.title)
-                    HStack {
-                        if total > 74 && total < 91 {
-                            Image(systemName: "checkmark.circle.fill")
-                        }
-                        Text("\(total) \(total == 1 ? "gram" : "grams")")
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(isBouncing ? .yellow : .primary)
-                        
-                        
-                     
-                    }
-                    Text("Aim for range: \(lowerBound) - \(upperBound)")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                    
-                }
-            }
-            
-            .padding()
-            
         }
         .onAppear { checkIfNewDay() }
     }
@@ -144,15 +136,15 @@ struct ContentView: View {
         if !Calendar.current.isDateInToday(lastAccessDate) {
             // Reset the variables for a new day
             total = 0
+            progressValue = 0.0
             UserDefaults.standard.set(Date(), forKey: "lastAccessDate")
         } else {
             // Load the saved count for the current day
             total = UserDefaults.standard.integer(forKey: "total")
+            let floatTotal = Float(total)
+            progressValue = floatTotal / Float(upperBound)
         }
     }
-//    private func saveTotal() {
-//        UserDefaults.standard.set(total, forKey: "savedTotal")
-//    }
 }
 
 #Preview {
