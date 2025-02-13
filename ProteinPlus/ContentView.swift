@@ -15,7 +15,7 @@ struct ContentView: View {
         VStack {
             ZStack {
                 ProgressView(progress: self.$viewModel.progressValue)
-                    .frame(width: 250.0, height: 250.0)
+                    .frame(width: 230.0, height: 230.0)
                     .padding(.top, 20)
                     .onAppear {
                         self.viewModel.progressValue = viewModel.progressValue
@@ -26,28 +26,29 @@ struct ContentView: View {
                             Image(systemName: "checkmark.circle.fill")
                         }
                         Text("\(viewModel.total) g")
-                            .font(.title)
+                            .font(.largeTitle)
                             .fontWeight(.semibold)
                     }
-                    
-                    Button("Goal: \(viewModel.upperBound) g") {
-                        viewModel.showingEditView = true
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
-                    .sheet(isPresented: $viewModel.showingEditView) {
-                        EditUpperBoundView(upperBound: $viewModel.upperBound)
-                            .presentationDetents([.height(300)])
-                    }
-                    
-                    Text("Left: \(viewModel.remainingProtein) g")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                    
                 }
                 .padding(.top)
             }
             .padding(.top, 50)
+            VStack {
+                Button("Goal: \(viewModel.upperBound) g") {
+                    viewModel.showingEditView = true
+                }
+                .font(.subheadline)
+                .foregroundStyle(.gray)
+                .sheet(isPresented: $viewModel.showingEditView) {
+                    EditUpperBoundView(upperBound: $viewModel.upperBound)
+                        .presentationDetents([.height(300)])
+                }
+                
+                Text("Left: \(viewModel.remainingProtein) g")
+                    .font(.subheadline)
+                    .foregroundStyle(.gray)
+            }
+            .padding()
             
             Spacer()
             
