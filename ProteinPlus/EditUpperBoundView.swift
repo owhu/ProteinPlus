@@ -15,12 +15,8 @@ struct EditUpperBoundView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                //            Stepper(value: $upperBound, in: 0...120) {
-                //                Text("Goal: \(upperBound) g")
-                //                    .font(.headline)
-                //            }
                 Picker("Goal: \(upperBound) g", selection: $upperBound) {
-                    ForEach(1..<120) { amount in
+                    ForEach(1..<200) { amount in
                         Text("^[\(amount) gram](inflect: true)")
                             .tag(amount)
                     }
@@ -36,7 +32,7 @@ struct EditUpperBoundView: View {
                         dismiss()
                     }
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.secondary)
                 }
             }
         }

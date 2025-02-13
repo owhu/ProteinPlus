@@ -8,143 +8,135 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("total") private var total = 0
-    @AppStorage("upperBound") private var upperBound = 90
-    
-    @State private var proteinAmount = 1
-    @State var progressValue: Float = 0.0
-    
-    @State private var showingEditView = false
 
+    @StateObject private var viewModel = ContentViewModel()
     
     var body: some View {
         VStack {
             ZStack {
-                ProgressView(progress: self.$progressValue)
-                    .frame(width: 160.0, height: 160.0)
+                ProgressView(progress: self.$viewModel.progressValue)
+                    .frame(width: 250.0, height: 250.0)
                     .padding(.top, 20)
                     .onAppear {
-                        self.progressValue = progressValue
+                        self.viewModel.progressValue = viewModel.progressValue
                     }
                 VStack {
                     HStack {
-                        if total >= upperBound {
+                        if viewModel.total >= viewModel.upperBound {
                             Image(systemName: "checkmark.circle.fill")
                         }
-                        Text("\(total) g")
+                        Text("\(viewModel.total) g")
                             .font(.title)
                             .fontWeight(.semibold)
                     }
                     
-//                    Text("Goal: \(upperBound) g")
-//                        .font(.subheadline)
-//                        .foregroundStyle(.gray)
-                    
-                    Button("Goal: \(upperBound) g") {
-                        showingEditView = true
+                    Button("Goal: \(viewModel.upperBound) g") {
+                        viewModel.showingEditView = true
                     }
                     .font(.subheadline)
                     .foregroundStyle(.gray)
-                    .sheet(isPresented: $showingEditView) {
-                        EditUpperBoundView(upperBound: $upperBound)
+                    .sheet(isPresented: $viewModel.showingEditView) {
+                        EditUpperBoundView(upperBound: $viewModel.upperBound)
                             .presentationDetents([.height(300)])
                     }
+                    
+                    Text("Left: \(viewModel.remainingProtein) g")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                    
                 }
                 .padding(.top)
             }
-            .padding(.top)
+            .padding(.top, 50)
             
-       
+            Spacer()
             
-            Section{
-                Picker("Protein", selection: $proteinAmount) {
-                    ForEach(1..<81) { amount in
-                        Text("^[\(amount) gram](inflect: true)")
-                            .tag(amount)
-                    }
+            
+            Picker("Protein", selection: $viewModel.proteinAmount) {
+                ForEach(1..<81) { amount in
+                    Text("^[\(amount) gram](inflect: true)")
+                        .tag(amount)
                 }
             }
             .pickerStyle(.wheel)
             
-            Section {
-                VStack {
-                    
-                    Button {
-                        withAnimation(.easeInOut(duration: 2.0)) {
-                            total += proteinAmount
-                            progressValue += (Float(proteinAmount)) / Float(upperBound)
-                        }
-
-                    } label: {
-                        Image(systemName: "plus")
-                            .padding()    // Add padding inside the button
-                            .frame(width: 75, height: 60) // Set a minimum size for the button
-                            .background(Color.yellow) // Optional: Change the background color
-                            .foregroundColor(.black) // Change text and icon color
-                            .cornerRadius(10) // Round the corners of the button
+            Spacer()
+            
+            
+            VStack {
+                Button {
+                    withAnimation(.easeInOut(duration: 1.5)) {
+                        viewModel.addProtein()
                     }
-                    .padding()
-                    .sensoryFeedback(.increase, trigger: total)
-
-                    Button {
-                        withAnimation(.easeInOut(duration: 2.0)) {
-                            total -= proteinAmount
-                            progressValue -= (Float(proteinAmount)) / Float(upperBound)
-                        }
-                    } label: {
-                        Image(systemName: "minus")
-                            .padding()    // Add padding inside the button
-                            .frame(width: 75, height: 60) // Set a minimum size for the button
-                            .background(Color.yellow) // Optional: Change the background color
-                            .foregroundColor(.black) // Change text and icon color
-                            .cornerRadius(10) // Round the corners of the button
-                    }
-                    .padding()
-                    .sensoryFeedback(.increase, trigger: total)
                     
-                    
+                } label: {
+                    Image(systemName: "plus")
+                        .modifier(StandardButtonModifier())
+//                        .padding()    // Add padding inside the button
+//                        .frame(width: 90, height: 60) // Set a minimum size for the button
+//                        .background(.thinMaterial) // Optional: Change the background color
+                        .foregroundColor(.blue) // Change text and icon color
+//                        .cornerRadius(10) // Round the corners of the button
+//                        .overlay(
+//                            RoundedRectangle(cornerRadius: 20)
+//                                .stroke(Color.gray, lineWidth: 3)
+//                        )
+                }
+               
+                .sensoryFeedback(.increase, trigger: viewModel.total)
+                
+                HStack {
                     Button {
-                        withAnimation(.easeInOut(duration: 2.0)) {
-                            total = 0
-                            progressValue = 0
+                        withAnimation(.easeInOut(duration: 1.5)) {
+                            viewModel.resetProtein()
                         }
                     } label: {
                         Image(systemName: "restart.circle")
-                            .padding()    // Add padding inside the button
-                            .frame(width: 50, height: 40) // Set a minimum size for the button
-                            .background(Color.yellow) // Optional: Change the background color
-                            .foregroundColor(.black) // Change text and icon color
-                            .cornerRadius(10) // Round the corners of the button
+                            .modifier(StandardSmallButtonModifier())
+                            .foregroundStyle(.gray)
+//                            .padding()    // Add padding inside the button
+//                            .frame(width: 160, height: 44) // Set a minimum size for the button
+//                            .background(.thinMaterial) // Optional: Change the background color
+//                            .foregroundColor(.gray) // Change text and icon color
+//                            .cornerRadius(10) // Round the corners of the button
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(Color.gray, lineWidth: 3)
+//                            )
                     }
-                    .padding()
+                    
+                    
+                    
+                    
+                    Button {
+                        withAnimation(.easeInOut(duration: 1.5)) {
+                            viewModel.subtractProtein()
+                        }
+                    } label: {
+                        Image(systemName: "minus")
+                            .modifier(StandardSmallButtonModifier())
+//                            .padding()    // Add padding inside the button
+//                            .frame(width: 160, height: 44) // Set a minimum size for the button
+//                            .background(.thinMaterial) // Optional: Change the background color
+                            .foregroundColor(.red) // Change text and icon color
+//                            .cornerRadius(10) // Round the corners of the button
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(Color.gray, lineWidth: 3)
+//                            )
+                    }
+                    
+                    .sensoryFeedback(.increase, trigger: viewModel.total)
+                    
+
                 }
-                
+                .padding()
             }
-            .padding()
         }
-        .onAppear { checkIfNewDay() }
-    }
-    // Save the daily count to UserDefaults
-    func saveTotal() {
-        UserDefaults.standard.set(total, forKey: "total")
+        .onAppear { viewModel.checkIfNewDay() }
     }
     
-    // Check if it's a new day and reset variables if necessary
-    func checkIfNewDay() {
-        let lastAccessDate = UserDefaults.standard.object(forKey: "lastAccessDate") as? Date ?? Date.distantPast
-        
-        if !Calendar.current.isDateInToday(lastAccessDate) {
-            // Reset the variables for a new day
-            total = 0
-            progressValue = 0.0
-            UserDefaults.standard.set(Date(), forKey: "lastAccessDate")
-        } else {
-            // Load the saved count for the current day
-            total = UserDefaults.standard.integer(forKey: "total")
-            let floatTotal = Float(total)
-            progressValue = floatTotal / Float(upperBound)
-        }
-    }
+
 }
 
 #Preview {

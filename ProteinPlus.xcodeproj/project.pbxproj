@@ -7,17 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE2E7BB72D00D147004B23C0 /* ProteinPlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BB62D00D147004B23C0 /* ProteinPlusTests.swift */; };
+		EE2E7BBE2D00DEFA004B23C0 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */; };
+		EE2E7BC02D00FEFB004B23C0 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BBF2D00FEFB004B23C0 /* ContentViewModelTests.swift */; };
 		EE7DFC3C2C9102FE0086D6CA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */; };
 		EE7DFC3E2C93A6370086D6CA /* EditUpperBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC3D2C93A6370086D6CA /* EditUpperBoundView.swift */; };
+		EE7DFC5C2C9B91A70086D6CA /* StandardButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC5B2C9B91A70086D6CA /* StandardButtonModifier.swift */; };
+		EE7DFC5E2C9B931A0086D6CA /* StandardSmallButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC5D2C9B931A0086D6CA /* StandardSmallButtonModifier.swift */; };
 		EEE61B652C6719EC006B4AA6 /* ProteinPlusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE61B642C6719EC006B4AA6 /* ProteinPlusApp.swift */; };
 		EEE61B672C6719EC006B4AA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE61B662C6719EC006B4AA6 /* ContentView.swift */; };
 		EEE61B692C6719EE006B4AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE61B682C6719EE006B4AA6 /* Assets.xcassets */; };
 		EEE61B6C2C6719EE006B4AA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE61B6B2C6719EE006B4AA6 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EE2E7BB82D00D147004B23C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEE61B592C6719EC006B4AA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEE61B602C6719EC006B4AA6;
+			remoteInfo = ProteinPlus;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		EE2E7BB42D00D147004B23C0 /* ProteinPlusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProteinPlusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2E7BB62D00D147004B23C0 /* ProteinPlusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinPlusTests.swift; sourceTree = "<group>"; };
+		EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		EE2E7BBF2D00FEFB004B23C0 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
 		EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		EE7DFC3D2C93A6370086D6CA /* EditUpperBoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUpperBoundView.swift; sourceTree = "<group>"; };
+		EE7DFC5B2C9B91A70086D6CA /* StandardButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButtonModifier.swift; sourceTree = "<group>"; };
+		EE7DFC5D2C9B931A0086D6CA /* StandardSmallButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSmallButtonModifier.swift; sourceTree = "<group>"; };
+		EE7DFCB72CA747010086D6CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEE61B612C6719EC006B4AA6 /* ProteinPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProteinPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEE61B642C6719EC006B4AA6 /* ProteinPlusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinPlusApp.swift; sourceTree = "<group>"; };
 		EEE61B662C6719EC006B4AA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,6 +48,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EE2E7BB12D00D147004B23C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEE61B5E2C6719EC006B4AA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -36,10 +65,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE2E7BB52D00D147004B23C0 /* ProteinPlusTests */ = {
+			isa = PBXGroup;
+			children = (
+				EE2E7BB62D00D147004B23C0 /* ProteinPlusTests.swift */,
+				EE2E7BBF2D00FEFB004B23C0 /* ContentViewModelTests.swift */,
+			);
+			path = ProteinPlusTests;
+			sourceTree = "<group>";
+		};
 		EEE61B582C6719EC006B4AA6 = {
 			isa = PBXGroup;
 			children = (
 				EEE61B632C6719EC006B4AA6 /* ProteinPlus */,
+				EE2E7BB52D00D147004B23C0 /* ProteinPlusTests */,
 				EEE61B622C6719EC006B4AA6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				EEE61B612C6719EC006B4AA6 /* ProteinPlus.app */,
+				EE2E7BB42D00D147004B23C0 /* ProteinPlusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,10 +95,14 @@
 		EEE61B632C6719EC006B4AA6 /* ProteinPlus */ = {
 			isa = PBXGroup;
 			children = (
+				EE7DFCB72CA747010086D6CA /* Info.plist */,
 				EEE61B642C6719EC006B4AA6 /* ProteinPlusApp.swift */,
 				EEE61B662C6719EC006B4AA6 /* ContentView.swift */,
+				EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */,
 				EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */,
 				EE7DFC3D2C93A6370086D6CA /* EditUpperBoundView.swift */,
+				EE7DFC5B2C9B91A70086D6CA /* StandardButtonModifier.swift */,
+				EE7DFC5D2C9B931A0086D6CA /* StandardSmallButtonModifier.swift */,
 				EEE61B682C6719EE006B4AA6 /* Assets.xcassets */,
 				EEE61B6A2C6719EE006B4AA6 /* Preview Content */,
 			);
@@ -76,6 +120,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EE2E7BB32D00D147004B23C0 /* ProteinPlusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE2E7BBC2D00D147004B23C0 /* Build configuration list for PBXNativeTarget "ProteinPlusTests" */;
+			buildPhases = (
+				EE2E7BB02D00D147004B23C0 /* Sources */,
+				EE2E7BB12D00D147004B23C0 /* Frameworks */,
+				EE2E7BB22D00D147004B23C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE2E7BB92D00D147004B23C0 /* PBXTargetDependency */,
+			);
+			name = ProteinPlusTests;
+			productName = ProteinPlusTests;
+			productReference = EE2E7BB42D00D147004B23C0 /* ProteinPlusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EEE61B602C6719EC006B4AA6 /* ProteinPlus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEE61B6F2C6719EE006B4AA6 /* Build configuration list for PBXNativeTarget "ProteinPlus" */;
@@ -103,6 +165,10 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					EE2E7BB32D00D147004B23C0 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = EEE61B602C6719EC006B4AA6;
+					};
 					EEE61B602C6719EC006B4AA6 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -122,11 +188,19 @@
 			projectRoot = "";
 			targets = (
 				EEE61B602C6719EC006B4AA6 /* ProteinPlus */,
+				EE2E7BB32D00D147004B23C0 /* ProteinPlusTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EE2E7BB22D00D147004B23C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEE61B5F2C6719EC006B4AA6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,6 +213,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EE2E7BB02D00D147004B23C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE2E7BC02D00FEFB004B23C0 /* ContentViewModelTests.swift in Sources */,
+				EE2E7BB72D00D147004B23C0 /* ProteinPlusTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEE61B5D2C6719EC006B4AA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,13 +229,58 @@
 				EE7DFC3E2C93A6370086D6CA /* EditUpperBoundView.swift in Sources */,
 				EEE61B672C6719EC006B4AA6 /* ContentView.swift in Sources */,
 				EEE61B652C6719EC006B4AA6 /* ProteinPlusApp.swift in Sources */,
+				EE2E7BBE2D00DEFA004B23C0 /* ContentViewModel.swift in Sources */,
+				EE7DFC5C2C9B91A70086D6CA /* StandardButtonModifier.swift in Sources */,
 				EE7DFC3C2C9102FE0086D6CA /* ProgressView.swift in Sources */,
+				EE7DFC5E2C9B931A0086D6CA /* StandardSmallButtonModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EE2E7BB92D00D147004B23C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEE61B602C6719EC006B4AA6 /* ProteinPlus */;
+			targetProxy = EE2E7BB82D00D147004B23C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		EE2E7BBA2D00D147004B23C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.hu.oliver.ProteinPlusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProteinPlus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ProteinPlus";
+			};
+			name = Debug;
+		};
+		EE2E7BBB2D00D147004B23C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.hu.oliver.ProteinPlusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProteinPlus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ProteinPlus";
+			};
+			name = Release;
+		};
 		EEE61B6D2C6719EE006B4AA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -283,11 +411,13 @@
 				DEVELOPMENT_TEAM = X7892LLAZC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProteinPlus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,11 +442,13 @@
 				DEVELOPMENT_TEAM = X7892LLAZC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProteinPlus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,6 +465,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EE2E7BBC2D00D147004B23C0 /* Build configuration list for PBXNativeTarget "ProteinPlusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2E7BBA2D00D147004B23C0 /* Debug */,
+				EE2E7BBB2D00D147004B23C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EEE61B5C2C6719EC006B4AA6 /* Build configuration list for PBXProject "ProteinPlus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
