@@ -8,50 +8,84 @@
 import Foundation
 import SwiftUI
 
+struct ProteinRecord: Identifiable, Codable {
+    var id = UUID()
+    let date: Date
+    let amount: Int
+}
+
 final class ContentViewModel: ObservableObject {
     
     @AppStorage("total") var total = 0
     @AppStorage("upperBound") var upperBound = 90
     
     @Published var proteinAmount = 1
-    @Published var progressValue: Float = 0.0
     @Published var showingEditView = false
+    @Published var proteinHistory: [ProteinRecord] = []
+    
+    @Published var progressValue: Float = 0.0
     
     var remainingProtein: Int {
         upperBound - total
     }
     
+    init() {
+        loadProteinHistory()
+    }
+    
     func addProtein() {
         total += proteinAmount
-        progressValue += (Float(proteinAmount)) / Float(upperBound)
+        updateProgress()
     }
     
     func resetProtein() {
         total = 0
-        progressValue = 0
+        updateProgress()
     }
     
     func subtractProtein() {
         if total >= proteinAmount {
             total -= proteinAmount
-            progressValue -= (Float(proteinAmount)) / Float(upperBound)
+            updateProgress()
         }
     }
     
-    // Check if it's a new day and reset variables if necessary
+    func updateProgress() {
+        progressValue = Float(total) / Float(upperBound)
+    }
+    
     func checkIfNewDay() {
-        let lastAccessDate = UserDefaults.standard.object(forKey: "lastAccessDate") as? Date ?? Date.distantPast
+        let calendar = Calendar.current
+        let today = Date()
         
-        if !Calendar.current.isDateInToday(lastAccessDate) {
-            // Reset the variables for a new day
-            total = 0
-            progressValue = 0.0
-            UserDefaults.standard.set(Date(), forKey: "lastAccessDate")
-        } else {
-            // Load the saved count for the current day
-            total = UserDefaults.standard.integer(forKey: "total")
-            let floatTotal = Float(total)
-            progressValue = floatTotal / Float(upperBound)
+        if let lastDate = UserDefaults.standard.object(forKey: "lastDate") as? Date {
+            if !calendar.isDate(lastDate, inSameDayAs: today) {
+                let newRecord = ProteinRecord(date: lastDate, amount: total)
+                proteinHistory.append(newRecord)
+                
+                if proteinHistory.count > 7 {
+                    proteinHistory.removeFirst(proteinHistory.count - 7)
+                }
+                
+                saveProteinHistory()
+                
+                total = 0
+            }
+        }
+        
+        UserDefaults.standard.set(today, forKey: "lastDate")
+    }
+    
+    private func loadProteinHistory() {
+        if let data = UserDefaults.standard.data(forKey: "proteinHistory"),
+           let history = try? JSONDecoder().decode([ProteinRecord].self, from: data) {
+            proteinHistory = history
+        }
+    }
+    
+    private func saveProteinHistory() {
+        if let encoded = try? JSONEncoder().encode(proteinHistory) {
+            UserDefaults.standard.set(encoded, forKey: "proteinHistory")
         }
     }
     

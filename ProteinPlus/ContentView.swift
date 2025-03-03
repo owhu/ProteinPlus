@@ -14,12 +14,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             ZStack {
-                ProgressView(progress: self.$viewModel.progressValue)
-                    .frame(width: 230.0, height: 230.0)
+                ProgressView(progress: $viewModel.progressValue)
+                    .frame(width: 200.0, height: 200.0)
                     .padding(.top, 20)
-                    .onAppear {
-                        self.viewModel.progressValue = viewModel.progressValue
-                    }
+//                    .onAppear {
+//                        self.viewModel.progressValue = viewModel.progressValue
+//                    }
                 VStack {
                     HStack {
                         if viewModel.total >= viewModel.upperBound {
@@ -49,6 +49,9 @@ struct ContentView: View {
                     .foregroundStyle(.gray)
             }
             .padding()
+            
+            // Add the chart here
+
             
             Spacer()
             

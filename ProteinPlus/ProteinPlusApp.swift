@@ -11,7 +11,7 @@ import SwiftUI
 struct ProteinPlusApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

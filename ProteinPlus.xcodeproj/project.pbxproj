@@ -10,6 +10,8 @@
 		EE2E7BB72D00D147004B23C0 /* ProteinPlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BB62D00D147004B23C0 /* ProteinPlusTests.swift */; };
 		EE2E7BBE2D00DEFA004B23C0 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */; };
 		EE2E7BC02D00FEFB004B23C0 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2E7BBF2D00FEFB004B23C0 /* ContentViewModelTests.swift */; };
+		EE452C662D7237B0008A04BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE452C652D7237B0008A04BB /* MainView.swift */; };
+		EE452C682D7237E3008A04BB /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE452C672D7237E3008A04BB /* ChartView.swift */; };
 		EE7DFC3C2C9102FE0086D6CA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */; };
 		EE7DFC3E2C93A6370086D6CA /* EditUpperBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC3D2C93A6370086D6CA /* EditUpperBoundView.swift */; };
 		EE7DFC5C2C9B91A70086D6CA /* StandardButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7DFC5B2C9B91A70086D6CA /* StandardButtonModifier.swift */; };
@@ -35,6 +37,8 @@
 		EE2E7BB62D00D147004B23C0 /* ProteinPlusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinPlusTests.swift; sourceTree = "<group>"; };
 		EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		EE2E7BBF2D00FEFB004B23C0 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
+		EE452C652D7237B0008A04BB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		EE452C672D7237E3008A04BB /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		EE7DFC3D2C93A6370086D6CA /* EditUpperBoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUpperBoundView.swift; sourceTree = "<group>"; };
 		EE7DFC5B2C9B91A70086D6CA /* StandardButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButtonModifier.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				EE7DFCB72CA747010086D6CA /* Info.plist */,
 				EEE61B642C6719EC006B4AA6 /* ProteinPlusApp.swift */,
+				EE452C652D7237B0008A04BB /* MainView.swift */,
+				EE452C672D7237E3008A04BB /* ChartView.swift */,
 				EEE61B662C6719EC006B4AA6 /* ContentView.swift */,
 				EE2E7BBD2D00DEFA004B23C0 /* ContentViewModel.swift */,
 				EE7DFC3B2C9102FE0086D6CA /* ProgressView.swift */,
@@ -227,9 +233,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE7DFC3E2C93A6370086D6CA /* EditUpperBoundView.swift in Sources */,
+				EE452C662D7237B0008A04BB /* MainView.swift in Sources */,
 				EEE61B672C6719EC006B4AA6 /* ContentView.swift in Sources */,
 				EEE61B652C6719EC006B4AA6 /* ProteinPlusApp.swift in Sources */,
 				EE2E7BBE2D00DEFA004B23C0 /* ContentViewModel.swift in Sources */,
+				EE452C682D7237E3008A04BB /* ChartView.swift in Sources */,
 				EE7DFC5C2C9B91A70086D6CA /* StandardButtonModifier.swift in Sources */,
 				EE7DFC3C2C9102FE0086D6CA /* ProgressView.swift in Sources */,
 				EE7DFC5E2C9B931A0086D6CA /* StandardSmallButtonModifier.swift in Sources */,
