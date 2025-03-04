@@ -31,10 +31,13 @@ final class ContentViewModel: ObservableObject {
     
     init() {
         loadProteinHistory()
+        checkIfNewDay()
+        updateProgress()
     }
     
     func addProtein() {
         total += proteinAmount
+        checkIfNewDay()
         updateProgress()
     }
     
@@ -46,6 +49,7 @@ final class ContentViewModel: ObservableObject {
     func subtractProtein() {
         if total >= proteinAmount {
             total -= proteinAmount
+            checkIfNewDay()
             updateProgress()
         }
     }
