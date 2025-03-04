@@ -13,21 +13,41 @@ struct ChartView: View {
     
     var body: some View {
         if !viewModel.proteinHistory.isEmpty {
-            Chart {
-                RuleMark(y: .value("Goal", viewModel.upperBound))
-                    .foregroundStyle(Color.mint)
-                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                
-                ForEach(viewModel.proteinHistory) { record in
-                    BarMark(
-                        x: .value("Date", record.date, unit: .day),
-                        y: .value("Protein", record.amount)
-                    )
-                    .foregroundStyle(Color.pink.gradient)
+            VStack {
+                Chart {
+                    RuleMark(y: .value("Goal", viewModel.upperBound))
+                        .foregroundStyle(Color.mint)
+                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                    
+                    ForEach(viewModel.proteinHistory) { record in
+                        BarMark(
+                            x: .value("Date", record.date, unit: .day),
+                            y: .value("Protein", record.amount)
+                        )
+                        .foregroundStyle(Color.pink.gradient)
+                    }
                 }
+                .frame(height: 220)
+                .chartYScale(domain: 0...200)
+                .chartXAxis {
+                    AxisMarks(values: viewModel.proteinHistory.map { $0.date}) { date in
+                        AxisValueLabel(format: .dateTime.day(), centered: true)
+                    }
+                }
+                
+                HStack {
+                    Image(systemName: "line.diagonal")
+                        .rotationEffect(Angle(degrees: 45))
+                        .foregroundColor(.mint)
+                    
+                    Text("Daily Goal")
+                        .foregroundColor(.secondary)
+                    
+                    Spacer()
+                }
+                .font(.caption2)
+                .padding(.leading, 4)
             }
-            .frame(height: 200)
-            .padding()
         } else {
             Text("No history found")
         }
