@@ -17,23 +17,32 @@ struct ChartView: View {
                 Chart {
                     RuleMark(y: .value("Goal", viewModel.upperBound))
                         .foregroundStyle(Color.mint)
-                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                        .lineStyle(StrokeStyle(lineWidth: 1/*, dash: [5]*/))
                     
                     ForEach(viewModel.proteinHistory) { record in
                         BarMark(
-                            x: .value("Date", record.date, unit: .day),
-                            y: .value("Protein", record.amount)
+                            x: .value("Date", record.date.formatted(.dateTime.month().day())),
+//                            x: .value("Date", record.date, unit: .day),
+                            y: .value("Protein", record.amount),
+                            width: 20
                         )
                         .foregroundStyle(Color.pink.gradient)
                     }
                 }
-                .frame(height: 220)
+                .frame(height: 200)
                 .chartYScale(domain: 0...200)
+//                .chartXAxis {
+//                    AxisMarks(position: .bottom, values: viewModel.proteinHistory.map { $0.date}) { date in
+//                        AxisValueLabel(format: .dateTime.month().day(), anchor: .center)
+//                    }
+//                }
                 .chartXAxis {
-                    AxisMarks(values: viewModel.proteinHistory.map { $0.date}) { date in
-                        AxisValueLabel(format: .dateTime.day(), centered: true)
+                    AxisMarks(position: .bottom) { _ in
+                        AxisValueLabel(anchor: .center) // Ensure label is centered
+                        AxisTick()
                     }
                 }
+                .padding(.bottom)
                 
                 HStack {
                     Image(systemName: "line.diagonal")
