@@ -26,7 +26,7 @@ final class ContentViewModel: ObservableObject {
     @Published var progressValue: Float = 0.0
     
     var remainingProtein: Int {
-        upperBound - total
+        max(0, upperBound - total)
     }
     
     init() {

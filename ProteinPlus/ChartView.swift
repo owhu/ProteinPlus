@@ -16,7 +16,7 @@ struct ChartView: View {
             VStack {
                 Chart {
                     RuleMark(y: .value("Goal", viewModel.upperBound))
-                        .foregroundStyle(Color.mint)
+                        .foregroundStyle(Color.blue)
                         .lineStyle(StrokeStyle(lineWidth: 1/*, dash: [5]*/))
                     
                     ForEach(viewModel.proteinHistory) { record in
@@ -26,7 +26,7 @@ struct ChartView: View {
                             y: .value("Protein", record.amount),
                             width: 20
                         )
-                        .foregroundStyle(Color.pink.gradient)
+                        .foregroundStyle(Color.yellow.gradient)
                     }
                 }
                 .frame(height: 200)
@@ -47,7 +47,7 @@ struct ChartView: View {
                 HStack {
                     Image(systemName: "line.diagonal")
                         .rotationEffect(Angle(degrees: 45))
-                        .foregroundColor(.mint)
+                        .foregroundColor(.blue)
                     
                     Text("Daily Goal")
                         .foregroundColor(.secondary)
